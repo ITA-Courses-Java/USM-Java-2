@@ -1,8 +1,0 @@
-*.class
-vctrmrcnsk/target
-target
-
-# Package Files #
-*.jar
-*.war
-*.ear
