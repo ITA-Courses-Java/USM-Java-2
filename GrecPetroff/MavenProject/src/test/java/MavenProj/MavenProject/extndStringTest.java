@@ -31,17 +31,6 @@ public class extndStringTest extends TestCase {
 		//assertTrue( result[0].equals(new extndString().subTag("My name is Alex.I'm from I32.")));
 		assertFalse(new extndString().splitText(str) == null);
 	}
-	
-	  public static void main( String[] args )
-	    {
-	        System.out.println( "Hello." );
-	        TestRunner runner = new  TestRunner();
-	        TestSuite suite = new TestSuite();
-	       
-	        suite.addTest(new extndStringTest("testSplitText"));
-	        suite.addTest(new extndStringTest("testSubTag"));
-	        suite.addTest(new extndStringTest("testSwapC"));
-	       runner.doRun(suite);
-	    }
+
 
 }
