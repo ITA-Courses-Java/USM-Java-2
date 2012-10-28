@@ -1,0 +1,13 @@
+package com.example.jdbcExample;
+
+import java.awt.List;
+
+public class StudentDAO {
+
+	private List studenti = null;
+	
+	public StudentDAO() {
+		
+	}
+	
+}

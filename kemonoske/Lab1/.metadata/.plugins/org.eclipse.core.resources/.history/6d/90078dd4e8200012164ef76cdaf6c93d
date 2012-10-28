@@ -1,0 +1,16 @@
+package com.example.jdbcExample;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class StudentTest extends Assert {
+
+	@Test
+	public void testgetId(){
+		
+		
+		
+	}
+	
+	
+}

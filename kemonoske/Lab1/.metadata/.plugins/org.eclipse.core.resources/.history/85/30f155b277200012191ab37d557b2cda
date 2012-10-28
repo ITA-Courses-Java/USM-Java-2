@@ -1,0 +1,16 @@
+package com.example.jdbcExample;
+
+import java.awt.List;
+import java.util.ArrayList;
+
+public class StudentDAO {
+
+	private ArrayList students = null;
+	
+	public StudentDAO() {
+		
+		students =  new ArrayList();
+		
+	}
+	
+}
