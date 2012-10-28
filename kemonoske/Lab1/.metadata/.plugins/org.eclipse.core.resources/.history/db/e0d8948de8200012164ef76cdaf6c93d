@@ -1,7 +1,0 @@
-package com.example.jdbcExample;
-
-public class StudentTest extends Assert {
-
-	
-	
-}
