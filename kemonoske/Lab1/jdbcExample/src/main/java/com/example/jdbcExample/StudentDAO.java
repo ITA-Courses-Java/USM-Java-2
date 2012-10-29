@@ -43,7 +43,8 @@ public class StudentDAO {
 	 * 
 	 * @return a table formated string with Students table contents
 	 */
-	public String listStudents() {
+	@Override
+	public String toString() {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -124,7 +125,7 @@ public class StudentDAO {
 		students = null;
 	}
 
-	public List<Student> getStudents() {
+	public List<Student> listStudents() {
 		return students;
 	}
 
