@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException{
 		
 		StudentDAO sd = new StudentDAO();
-		
-		System.out.println(sd.listStudents());
+		sd.listStudents();
+		System.out.println(sd);
 		
 	}
 	

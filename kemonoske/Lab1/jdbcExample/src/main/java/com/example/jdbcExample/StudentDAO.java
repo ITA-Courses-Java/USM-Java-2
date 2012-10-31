@@ -27,16 +27,6 @@ public class StudentDAO {
 				.getConnection("jdbc:postgresql://localhost:5432/Lab1",
 						"postgres", "postgres");
 
-		Statement st = con.createStatement();
-
-		/* Select all rows from Students table */
-		ResultSet rs = st.executeQuery("SELECT * FROM \"Students\"");
-
-		/* Add selected rows to Array List */
-		while (rs.next())
-			students.add(new Student(rs.getInt("id"), rs
-					.getString("first_name"), rs.getString("last_name")));
-		rs.close();
 	}
 
 	/**
@@ -125,7 +115,17 @@ public class StudentDAO {
 		students = null;
 	}
 
-	public List<Student> listStudents() {
+	public List<Student> listStudents() throws SQLException {
+		Statement st = con.createStatement();
+
+		/* Select all rows from Students table */
+		ResultSet rs = st.executeQuery("SELECT * FROM \"Students\"");
+
+		/* Add selected rows to Array List */
+		while (rs.next())
+			students.add(new Student(rs.getInt("id"), rs
+					.getString("first_name"), rs.getString("last_name")));
+		rs.close();
 		return students;
 	}
 
