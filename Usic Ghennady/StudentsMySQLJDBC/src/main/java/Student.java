@@ -14,7 +14,7 @@ public class Student {
     private String firstName;
     private String lastName;
 
-    public Student(Integer ID,String firstName,String lastName){
+    public Student(Integer ID, String firstName, String lastName) {
         this.setID(ID);
         this.setFirstName(firstName);
         this.setLastName(lastName);
@@ -44,7 +44,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String toString(){
-        return String.format("%-10d%-10s%-10s",this.getID(),this.getFirstName(),this.getLastName());
+    public String toString() {
+        return String.format("%-10d%-10s%-10s", this.getID(), this.getFirstName(), this.getLastName());
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/StudentsMySQLJDBC/src/main/java"/>
+	<classpathentry kind="src" path="/StudentsMySQLJDBC/src/main/resources"/>
+	<classpathentry kind="src" path="/StudentsMySQLJDBC/src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: mysql:mysql-connector-java:5.1.21"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/junit-4.10.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

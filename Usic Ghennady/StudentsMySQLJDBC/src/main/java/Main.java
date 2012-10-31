@@ -5,9 +5,9 @@
  * Time: 5:51 PM
  */
 public class Main {
-     public static void main(String[] argv){
-         StudentDAO studentDAO = new StudentDAO("students","student");
-         studentDAO.connect();
-         studentDAO.listStudents();
-     }
+    public static void main(String[] argv) {
+        StudentDAO studentDAO = new StudentDAO("students", "student");
+        studentDAO.connect();
+        studentDAO.listStudents();
+    }
 }

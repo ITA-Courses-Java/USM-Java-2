@@ -13,8 +13,9 @@ import java.sql.*;
 public class StudentDAO {
     private String databaseName;
     private String tableName;
+    private Connection connection;
 
-    public StudentDAO(String databaseName,String tableName) {
+    public StudentDAO(String databaseName, String tableName) {
         this.setDatabaseName(databaseName);
         this.setTableName(tableName);
     }
@@ -35,8 +36,6 @@ public class StudentDAO {
         this.connection = connection;
     }
 
-    private Connection connection;
-
     public String getDatabaseName() {
         return databaseName;
     }
@@ -45,11 +44,11 @@ public class StudentDAO {
         this.databaseName = databaseName;
     }
 
-    public void connect(){
-       this.setConnection(MySQLDatabaseFactory.connect("localhost/" + this.getDatabaseName(), "root", "Minamino7"));
-       if(this.getConnection() == null){
-           System.err.println("Unable to make connection to database " + this.getDatabaseName());
-       }
+    public void connect() {
+        this.setConnection(MySQLDatabaseFactory.connect("localhost/" + this.getDatabaseName(), "root", "Minamino7"));
+        if (this.getConnection() == null) {
+            System.err.println("Unable to make connection to database " + this.getDatabaseName());
+        }
     }
 
     /**
@@ -57,8 +56,8 @@ public class StudentDAO {
      * every entry in table provided by tableName
      * in database provided by databaseName.
      */
-    public void listStudents(){
-        if(this.getConnection()!= null){
+    public void listStudents() {
+        if (this.getConnection() != null) {
             try {
                 Statement statement = this.getConnection().createStatement();
                 ResultSet resultSet = statement.executeQuery("select * from " + this.getTableName());
@@ -66,21 +65,47 @@ public class StudentDAO {
                 int numberOfColumns = resultSetMetaData.getColumnCount();
                 // Displaying table's head
                 /*----------------------------------------------------------------*/
-                for(int i=1;i<=numberOfColumns;i++){
-                   System.out.printf("%-10s",resultSetMetaData.getColumnName(i));
+                for (int i = 1; i <= numberOfColumns; i++) {
+                    System.out.printf("%-10s", resultSetMetaData.getColumnName(i));
                 }
                 System.out.println();
                 /*----------------------------------------------------------------*/
 
                 // Displaying table's entries
                 /*----------------------------------------------*/
-                while(resultSet.next()){
-                    System.out.println(new Student((Integer)resultSet.getObject("ID"),(String)resultSet.getObject("firstName"),(String)resultSet.getObject("lastName")));
+                while (resultSet.next()) {
+                    System.out.println(new Student((Integer) resultSet.getObject("ID"), (String) resultSet.getObject("firstName"), (String) resultSet.getObject("lastName")));
                 }
                 /*-----------------------------------------------*/
+
+                // Closing statement and resultSet
+                resultSet.close();
+                statement.close();
+
+                /*
+                If you want, you may close connection
+                 */
+                //MySQLDatabaseFactory.closeConnection(this.getConnection());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    protected void finalize() throws Throwable {
+        try {
+            /*
+             Connection is closed here, because I think
+             that it's not suitable to close it in listStudents() method.
+             And if programmer forgets to close connection this lines
+             do good job.
+             I know that rewriting finalize() method is a bad practice.
+              */
+            if (this.getConnection() != null) {
+                this.getConnection().close();
+            }
+        } finally {
+            super.finalize();
         }
     }
 }
