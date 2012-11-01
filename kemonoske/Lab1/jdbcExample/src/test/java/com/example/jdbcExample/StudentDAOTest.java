@@ -13,7 +13,7 @@ public class StudentDAOTest extends Assert {
 		try {
 			StudentDAO sd = new StudentDAO();
 			assertNotNull("Conection test:", sd.getCon());
-			assertNotNull("Content test:", sd.getStudents());
+			assertNotNull("Content test:", sd.listStudents());
 		} catch (ClassNotFoundException e) {
 			assertEquals("ClassNotFondException test:", e instanceof ClassNotFoundException);
 		} catch (SQLException e) {
