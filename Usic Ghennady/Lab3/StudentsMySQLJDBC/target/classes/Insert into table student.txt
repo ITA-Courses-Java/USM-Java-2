@@ -1,0 +1,4 @@
+insert into student(firstName,lastName) values
+('Ghennady','Usic'),
+('Alexey','Petrov'),
+('Denis','Velcev');
