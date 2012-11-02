@@ -14,7 +14,10 @@ public class MySQLConnectionManager extends DBConnectionManager {
 
     @Override
     public void connect() throws SQLException {
-        connection = DriverManager.getConnection(url, user, password);
+        connection = DriverManager
+                .getConnection("jdbc:mysql://" + host + "/" + name,
+                               user,
+                               password);
     }
 
     @Override
@@ -24,11 +27,6 @@ public class MySQLConnectionManager extends DBConnectionManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void formUrl() {
-        url = "jdbc:mysql://" + host + "/" + name;
     }
 
 }

@@ -12,8 +12,6 @@ public abstract class DBConnectionManager {
     String user;
     String password;
 
-    String url;
-
     public DBConnectionManager(String host,
                                String name,
                                String user,
@@ -22,11 +20,7 @@ public abstract class DBConnectionManager {
         this.name = name;
         this.user = user;
         this.password = password;
-
-        formUrl();
     }
-
-    public abstract void formUrl();
 
     public abstract void connect() throws SQLException;
     public abstract void disconnect();
@@ -37,6 +31,38 @@ public abstract class DBConnectionManager {
 
     public void setConnection(Connection connection) {
         this.connection = connection;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

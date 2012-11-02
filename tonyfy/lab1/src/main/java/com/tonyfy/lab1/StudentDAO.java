@@ -14,7 +14,7 @@ public class StudentDAO {
                                        "root",
                                        "0000");
 
-    public static List<Student> getStudentsList() {
+    public static List<Student> selectAll() {
         List<Student> students = new LinkedList<Student>();
 
         try {
@@ -29,13 +29,49 @@ public class StudentDAO {
                                          resultSet.getString("firstName"),
                                          resultSet.getString("lastName")));
             }
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             db.disconnect();
         }
 
         return students;
+    }
+
+    public static void add(Student student) {
+        try {
+            db.connect();
+
+            Statement statement = db.getConnection().createStatement();
+            statement.execute(
+                    "INSERT INTO `Student` (" +
+                    "`firstName` , `lastName`" +
+                    ")" +
+                    "VALUES (" +
+                    "'" + student.firstName + "', " +
+                    "'" + student.lastName + "'" +
+                    ")");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.disconnect();
+        }
+    }
+
+    public static void delete(int id) {
+        try {
+            db.connect();
+
+            Statement statement = db.getConnection().createStatement();
+
+            statement.execute("DELETE FROM `Student`" +
+                              "WHERE `id` = " + id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.disconnect();
+        }
     }
 
 }
