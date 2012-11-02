@@ -23,7 +23,14 @@ public abstract class DBConnectionManager {
     }
 
     public abstract void connect() throws SQLException;
-    public abstract void disconnect();
+
+    public void disconnect() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Connection getConnection() {
         return connection;

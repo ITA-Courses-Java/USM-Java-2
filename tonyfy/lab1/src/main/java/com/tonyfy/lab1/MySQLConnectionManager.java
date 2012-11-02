@@ -20,13 +20,4 @@ public class MySQLConnectionManager extends DBConnectionManager {
                                password);
     }
 
-    @Override
-    public void disconnect() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

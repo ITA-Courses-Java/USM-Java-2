@@ -21,8 +21,8 @@ public class StudentDAO {
             db.connect();
 
             Statement statement = db.getConnection().createStatement();
-            ResultSet resultSet = statement
-                    .executeQuery("SELECT * FROM `Student`");
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * FROM `Student`");
 
             while (resultSet.next()) {
                 students.add(new Student(resultSet.getInt("id"),
@@ -63,9 +63,9 @@ public class StudentDAO {
             db.connect();
 
             Statement statement = db.getConnection().createStatement();
-
-            statement.execute("DELETE FROM `Student`" +
-                              "WHERE `id` = " + id);
+            statement.execute(
+                    "DELETE FROM `Student`" +
+                    "WHERE `id` = " + id);
 
         } catch (SQLException e) {
             e.printStackTrace();
