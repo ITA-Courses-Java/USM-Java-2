@@ -18,6 +18,9 @@ public class ConnectionPool extends Thread {
 	private int maxConnections = 10;
 	private int port = 5432;
 
+	/**
+	 * Loads driver and writes connection info into private fields
+	 */
 	public ConnectionPool(String host, int port, String db, String username,
 			String password) {
 
@@ -39,15 +42,20 @@ public class ConnectionPool extends Thread {
 		}
 	}
 
-	private Connection getConnection(){
+	/**
+	 * Uses Driver manager to create a conection to DB host
+	 * 
+	 * @return new connection or null, when some error occurs
+	 */
+	private Connection getConnection() {
 
 		try {
-			return DriverManager.getConnection("jdbc:postgresql://" + host + ":"
-					+ port + "/" + db, username, password);
+			return DriverManager.getConnection("jdbc:postgresql://" + host
+					+ ":" + port + "/" + db, username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -57,7 +65,7 @@ public class ConnectionPool extends Thread {
 		if (available.size() == 0) {
 
 			con = this.getConnection();
-			if(con != null)
+			if (con != null)
 				used.add(con);
 			else
 				throw new NullPointerException();
@@ -74,6 +82,9 @@ public class ConnectionPool extends Thread {
 
 	}
 
+	/**
+	 * Closes an used connection and makes it available
+	 */
 	public void disconnect(Connection con) throws SQLException {
 
 		used.remove(con);
@@ -82,6 +93,9 @@ public class ConnectionPool extends Thread {
 
 	}
 
+	/**
+	 * Closes all used conections clears the lists of used and unused connection
+	 */
 	@Override
 	protected void finalize() throws Throwable {
 
@@ -93,6 +107,9 @@ public class ConnectionPool extends Thread {
 		available.clear();
 	}
 
+	/**
+	 * Removes unused connections when the limit of connections is reached
+	 */
 	@Override
 	public void run() {
 
