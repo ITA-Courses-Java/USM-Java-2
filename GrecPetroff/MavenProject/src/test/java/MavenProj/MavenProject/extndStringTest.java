@@ -26,9 +26,6 @@ public class extndStringTest extends TestCase {
 
 	public void testSplitText(String str) {
 		String[] result = null ;
-		//result[0]="My name is Alex.";
-		//result[1]="I'm from I32.";
-		//assertTrue( result[0].equals(new extndString().subTag("My name is Alex.I'm from I32.")));
 		assertFalse(new extndString().splitText(str) == null);
 	}
 	
