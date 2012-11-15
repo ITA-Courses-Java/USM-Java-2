@@ -14,7 +14,7 @@ public class StudentDAO {
                                        "root",
                                        "0000");
 
-    public static List<Student> selectAll() {
+    public static List<Student> selectAll() throws SQLException {
         List<Student> students = new LinkedList<Student>();
 
         try {
@@ -31,6 +31,8 @@ public class StudentDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }
@@ -38,7 +40,7 @@ public class StudentDAO {
         return students;
     }
 
-    public static void add(Student student) {
+    public static void add(Student student) throws SQLException {
         try {
             db.connect();
 
@@ -52,12 +54,14 @@ public class StudentDAO {
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }
     }
 
-    public static void delete(int id) {
+    public static void delete(int id) throws SQLException {
         try {
             db.connect();
 
@@ -69,6 +73,8 @@ public class StudentDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }

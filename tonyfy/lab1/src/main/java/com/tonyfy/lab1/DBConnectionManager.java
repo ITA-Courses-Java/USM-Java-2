@@ -24,11 +24,13 @@ public abstract class DBConnectionManager {
 
     public abstract void connect() throws SQLException;
 
-    public void disconnect() {
+    public void disconnect() throws SQLException {
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         }
     }
 
