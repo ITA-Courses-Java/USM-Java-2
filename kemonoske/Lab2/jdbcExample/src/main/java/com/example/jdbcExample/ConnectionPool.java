@@ -47,13 +47,14 @@ public class ConnectionPool extends Thread {
 	 * 
 	 * @return new connection or null, when some error occurs
 	 */
-	private Connection getConnection() {
+	private Connection getConnection() throws SQLException{
 
 		try {
 			return DriverManager.getConnection("jdbc:postgresql://" + host
 					+ ":" + port + "/" + db, username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 
 		return null;
