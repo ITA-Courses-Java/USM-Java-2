@@ -116,12 +116,12 @@ public class StudentDAO {
 	 */
 	public Student addStudent(Student s) {
 
-		try (Statement st = cp.connect().createStatement()) {/*
-															 * try with
-															 * resources will
-															 * close st
-															 * automaticaly
-															 */
+		
+		Connection con = null;
+		
+		try {
+			con = cp.connect();
+			Statement st = con.createStatement();
 
 			try (ResultSet id = st
 					.executeQuery("INSERT INTO \"Students\" (id, first_name, last_name) VALUES (nextval('student_id'), '"
@@ -147,6 +147,9 @@ public class StudentDAO {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			st.close();
+			cp.disconnect() /*return connection to the pool*/
 		}
 
 		return s;
@@ -155,12 +158,11 @@ public class StudentDAO {
 
 	public void deleteStudent(int id) {
 
-		try (Statement st = cp.connect().createStatement()) {/*
-															 * try with
-															 * resources will
-															 * close st
-															 * automaticaly
-															 */
+		Connection con = null;
+		
+		try {
+			con = cp.connect();
+			Statement st = con.createStatement();
 															
 			if( 1 == st.executeUpdate("DELETE FROM \"Students\" WHERE id = '" + id + "'")) {
 				
@@ -177,6 +179,9 @@ public class StudentDAO {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			st.close();
+			cp.disconnect() /*return connection to the pool*/
 		}
 
 	}

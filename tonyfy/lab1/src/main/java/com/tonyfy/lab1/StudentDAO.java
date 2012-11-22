@@ -1,8 +1,8 @@
 package com.tonyfy.lab1;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,15 +14,15 @@ public class StudentDAO {
                                        "root",
                                        "0000");
 
-    public static List<Student> selectAll() {
+    public static List<Student> selectAll() throws SQLException {
         List<Student> students = new LinkedList<Student>();
 
         try {
             db.connect();
 
-            Statement statement = db.getConnection().createStatement();
-            ResultSet resultSet = statement
-                    .executeQuery("SELECT * FROM `Student`");
+            PreparedStatement statement = db.getConnection()
+                    .prepareStatement("SELECT * FROM `Student`");
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 students.add(new Student(resultSet.getInt("id"),
@@ -31,6 +31,8 @@ public class StudentDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }
@@ -38,37 +40,41 @@ public class StudentDAO {
         return students;
     }
 
-    public static void add(Student student) {
+    public static void add(Student student) throws SQLException {
         try {
             db.connect();
 
-            Statement statement = db.getConnection().createStatement();
-            statement.execute(
+            PreparedStatement statement = db.getConnection().prepareStatement(
                     "INSERT INTO `Student` (" +
                     "`firstName` , `lastName`" +
                     ")" +
-                    "VALUES (" +
-                    "'" + student.firstName + "', " +
-                    "'" + student.lastName + "'" +
-                    ")");
+                    "VALUES (?, ?)");
+            statement.setString(1, student.firstName);
+            statement.setString(2, student.lastName);
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }
     }
 
-    public static void delete(int id) {
+    public static void delete(int id) throws SQLException {
         try {
             db.connect();
 
-            Statement statement = db.getConnection().createStatement();
-
-            statement.execute("DELETE FROM `Student`" +
-                              "WHERE `id` = " + id);
+            PreparedStatement statement = db.getConnection().prepareStatement(
+                "DELETE FROM `Student`" +
+                "WHERE `id` = ?");
+            statement.setInt(1, id);
+            statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
+
+            throw e;
         } finally {
             db.disconnect();
         }
