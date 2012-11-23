@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Index extends HttpServlet{
+/**
+ * Servlet implementation class Hello
+ */
+@WebServlet("/")
+public class Hello extends HttpServlet{
 
 	private PrintWriter out = null;
 	
@@ -16,8 +21,33 @@ public class Index extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		super.service(request, response);
+		hello(request, response);
 		
+		
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		hello(request, response);
+		
+	}
+
+
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		hello(request, response);
+		
+	}
+
+
+	public void hello(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+
 		out = response.getWriter();
 		out.print(
 			"<!DOCTYPE html>\n" + 
@@ -33,6 +63,7 @@ public class Index extends HttpServlet{
 				);
 		
 	}
+	
 
 	@Override
 	public void destroy() {
@@ -47,3 +78,4 @@ public class Index extends HttpServlet{
 	
 	
 }
+
